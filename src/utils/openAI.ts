@@ -74,8 +74,10 @@ export function parseOpenAIJson(rawString: string): BodyInit {
       //var index1 = result.indexOf("```", 0);
       //var index2 = result.lastIndexOf("```");
       var code = result.split("```")[1]
+      console.log('start upload')
       downloadUrl = main(code);
       mkUrl = '[下载LSP文件](' + downloadUrl + ')'
+      console.log(downloadUrl)
     }
   } catch (e) {
 
