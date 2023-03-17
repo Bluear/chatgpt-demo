@@ -5,9 +5,11 @@ import { verifySignature } from '@/utils/auth'
 import { fetch, ProxyAgent } from 'undici'
 import { BlobServiceClient } from '@azure/storage-blob'
 
+const connString = import.meta.env.CONNECT_STRING
+
 
 // Connection string
-const connString = 'EndpointSuffix=core.windows.net';
+//const connString = 'EndpointSuffix=core.windows.net';
 var downloadString = "https://ysmedia.blob.core.windows.net/lsp";
 if (!connString) throw Error('Azure Storage Connection string not found');
 
