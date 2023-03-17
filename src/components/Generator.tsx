@@ -27,7 +27,7 @@ export default () => {
     } catch (err) {
       console.error(err)
     }
-    
+
     window.addEventListener('beforeunload', handleBeforeUnload)
     onCleanup(() => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
@@ -108,6 +108,7 @@ export default () => {
             continue
           }
           if (char) {
+            console.log(char);
             setCurrentAssistantMessage(currentAssistantMessage() + char)
           }
           smoothToBottom()

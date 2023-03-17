@@ -1,5 +1,6 @@
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser'
 import type { ChatMessage } from '@/types'
+import { main } from '@/pages/api/azblob'
 
 const model = import.meta.env.OPENAI_API_MODEL || 'gpt-3.5-turbo'
 
@@ -13,7 +14,7 @@ export const generatePayload = (apiKey: string, messages: ChatMessage[]): Reques
     model,
     messages,
     temperature: 0.6,
-    stream: true,
+    stream: false
   }),
 })
 
@@ -24,6 +25,7 @@ export const parseOpenAIStream = (rawResponse: Response) => {
   const stream = new ReadableStream({
     async start(controller) {
       const streamParser = (event: ParsedEvent | ReconnectInterval) => {
+        console.log(event.type)
         if (event.type === 'event') {
           const data = event.data
           if (data === '[DONE]') {
@@ -58,4 +60,27 @@ export const parseOpenAIStream = (rawResponse: Response) => {
   })
 
   return stream
+}
+
+export function parseOpenAIJson(rawString: string): BodyInit {
+  let result = '';
+  let mkUrl = '';
+  let downloadUrl = '';
+  console.log(rawString)
+  try {
+    var json = JSON.parse(rawString)
+    result = json.choices[0].message.content
+    if (result.includes("```") && result.includes("defun")) {
+      //var index1 = result.indexOf("```", 0);
+      //var index2 = result.lastIndexOf("```");
+      var code = result.split("```")[1]
+      downloadUrl = main(code);
+      mkUrl = '[下载LSP文件](' + downloadUrl + ')'
+    }
+  } catch (e) {
+
+  }
+  //console.log(downloadUrl)
+  return result + "\n" + mkUrl
+
 }
