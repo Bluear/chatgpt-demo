@@ -66,18 +66,22 @@ export function parseOpenAIJson(rawString: string): BodyInit {
   let result = '';
   let mkUrl = '';
   let downloadUrl = '';
+  let code = '';
   console.log(rawString)
   try {
     var json = JSON.parse(rawString)
     result = json.choices[0].message.content
-    if (result.includes("```") && result.includes("defun")) {
+    if (result.includes("```")) {
       //var index1 = result.indexOf("```", 0);
       //var index2 = result.lastIndexOf("```");
-      var code = result.split("```")[1]
-      console.log('start upload')
-      downloadUrl = main(code);
-      mkUrl = '[下载LSP文件](' + downloadUrl + ')'
-      console.log(downloadUrl)
+      code = result.split("```")[1]
+      if (code.startsWith("lisp")) {
+        code = code.substring(4, code.length)
+        console.log('start upload')
+        downloadUrl = main(code);
+        mkUrl = '[下载LSP文件](' + downloadUrl + ')'
+        console.log(downloadUrl)
+      }
     }
   } catch (e) {
 

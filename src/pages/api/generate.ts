@@ -17,6 +17,7 @@ const sitePassword = import.meta.env.SITE_PASSWORD
 export const post: APIRoute = async (context) => {
   const body = await context.request.json()
   const { sign, time, messages, pass } = body
+  console.log(messages)
   if (!messages) {
     return new Response('No input text')
   }
