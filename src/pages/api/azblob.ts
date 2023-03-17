@@ -7,7 +7,7 @@ import { BlobServiceClient } from '@azure/storage-blob'
 
 
 // Connection string
-const connString = 'DefaultEndpointsProtocol=https;AccountName=ysmedia;AccountKey=JxYBZG6Tl4YF7WKLAaaAV0bcmQBhay6bgVbbYBBcdKSjTztd+Xk3aGwQ03WpmZNaDOMXGJsiEse3njCXLSRsyg==;EndpointSuffix=core.windows.net';
+const connString = 'EndpointSuffix=core.windows.net';
 var downloadString = "https://ysmedia.blob.core.windows.net/lsp";
 if (!connString) throw Error('Azure Storage Connection string not found');
 
