@@ -71,6 +71,8 @@ export function parseOpenAIJson(rawString: string): BodyInit {
   try {
     var json = JSON.parse(rawString)
     result = json.choices[0].message.content
+    result =result.substring(0,result.lastIndexOf("\n"))
+    console.log(result)
     if (result.includes("```")) {
       //var index1 = result.indexOf("```", 0);
       //var index2 = result.lastIndexOf("```");
