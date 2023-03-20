@@ -111,14 +111,8 @@ export default () => {
           const char = decoder.decode(value)
           if (char === '\n' && currentAssistantMessage().endsWith('\n'))
             continue
-<<<<<<< HEAD
-          }
-          if (char) {
-            console.log(char);
-=======
 
           if (char)
->>>>>>> ec248e3dac454bf52912aa6c07b9fd19d21ef4e0
             setCurrentAssistantMessage(currentAssistantMessage() + char)
 
           smoothToBottom()
