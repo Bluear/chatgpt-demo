@@ -1,14 +1,11 @@
-<<<<<<< HEAD
 import type { APIRoute } from 'astro'
 import { generatePayload, parseOpenAIStream, parseOpenAIJson } from '@/utils/openAI'
-=======
 // #vercel-disable-blocks
 import { ProxyAgent, fetch } from 'undici'
 // #vercel-end
-import { generatePayload, parseOpenAIStream } from '@/utils/openAI'
->>>>>>> ec248e3dac454bf52912aa6c07b9fd19d21ef4e0
+//import { generatePayload, parseOpenAIStream } from '@/utils/openAI'
 import { verifySignature } from '@/utils/auth'
-import type { APIRoute } from 'astro'
+
 
 
 
@@ -17,13 +14,7 @@ const httpsProxy = import.meta.env.HTTPS_PROXY
 const baseUrl = (import.meta.env.OPENAI_API_BASE_URL || 'https://api.openai.com').trim().replace(/\/$/, '')
 const sitePassword = import.meta.env.SITE_PASSWORD
 
-<<<<<<< HEAD
-
-
-export const post: APIRoute = async (context) => {
-=======
 export const post: APIRoute = async(context) => {
->>>>>>> ec248e3dac454bf52912aa6c07b9fd19d21ef4e0
   const body = await context.request.json()
   const { sign, time, messages, pass } = body
   console.log(messages)
@@ -54,12 +45,10 @@ export const post: APIRoute = async(context) => {
     initOptions.dispatcher = new ProxyAgent(httpsProxy)
   // #vercel-end
 
-<<<<<<< HEAD
   // @ts-ignore
   const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions) as Response
-  return new Response(await parseOpenAIJson(await response.text()))
+  
   //return new Response(parseOpenAIStream(response))
-=======
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions).catch((err: Error) => {
@@ -72,8 +61,7 @@ export const post: APIRoute = async(context) => {
     }), { status: 500 })
   }) as Response
 
-  return parseOpenAIStream(response) as Response
->>>>>>> ec248e3dac454bf52912aa6c07b9fd19d21ef4e0
+  return new Response(await parseOpenAIJson(await response.text()))
 }
 
 
