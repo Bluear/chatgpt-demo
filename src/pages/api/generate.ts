@@ -46,7 +46,7 @@ export const post: APIRoute = async(context) => {
   // #vercel-end
 
   // @ts-ignore
-  const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions) as Response
+  //const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions) as Response
   
   //return new Response(parseOpenAIStream(response))
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
