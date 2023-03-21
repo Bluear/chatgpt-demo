@@ -10,6 +10,7 @@ import { verifySignature } from '@/utils/auth'
 
 
 const apiKey = import.meta.env.OPENAI_API_KEY
+if (!apiKey) throw Error('OpenAI Key string not found');
 console.log(apiKey)
 const httpsProxy = import.meta.env.HTTPS_PROXY
 const baseUrl = (import.meta.env.OPENAI_API_BASE_URL || 'https://api.openai.com').trim().replace(/\/$/, '')
