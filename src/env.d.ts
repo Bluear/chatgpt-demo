@@ -8,7 +8,7 @@ interface ImportMetaEnv {
   readonly SECRET_KEY: string
   readonly SITE_PASSWORD: string
   readonly OPENAI_API_MODEL: string
-
+  readonly CONNECT_STRING: string
 }
 
 interface ImportMeta {
