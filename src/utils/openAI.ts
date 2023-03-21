@@ -3,7 +3,7 @@ import type { ParsedEvent, ReconnectInterval } from 'eventsource-parser'
 import type { ChatMessage } from '@/types'
 import { main } from '@/pages/api/azblob'
 
-const model = process.env.OPENAI_API_MODEL || 'gpt-3.5-turbo'
+const model = import.meta.env.VITE_OPENAI_API_MODEL || 'gpt-3.5-turbo'
 
 export const generatePayload = (apiKey: string, messages: ChatMessage[]): RequestInit & { dispatcher?: any } => ({
   headers: {

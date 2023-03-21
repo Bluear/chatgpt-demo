@@ -1,8 +1,8 @@
 import { BlobServiceClient } from '@azure/storage-blob'
 
-const connString = process.env.CONNECT_STRING;
+const connString = import.meta.env.VITE_CONNECT_STRING;
 
-const apiKey = process.env.OPENAI_API_KEY;
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
 // Connection string
 //const connString = 'EndpointSuffix=core.windows.net';

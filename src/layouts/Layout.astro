@@ -18,9 +18,9 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     {
-      process.env.HEAD_SCRIPTS
+      import.meta.env.VITE_HEAD_SCRIPTS
         ? (
-        <Fragment set:html={process.env.HEAD_SCRIPTS} />
+        <Fragment set:html={import.meta.env.VITE_HEAD_SCRIPTS} />
           )
         : null
     }
