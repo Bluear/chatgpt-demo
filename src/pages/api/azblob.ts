@@ -1,6 +1,6 @@
 import { BlobServiceClient } from '@azure/storage-blob'
 
-const connString = (import.meta.env.CONNECT_STRING || 'DefaultEndpointsProtocol=https;AccountName=ysmedia;AccountKey=JxYBZG6Tl4YF7WKLAaaAV0bcmQBhay6bgVbbYBBcdKSjTztd+Xk3aGwQ03WpmZNaDOMXGJsiEse3njCXLSRsyg==;EndpointSuffix=core.windows.net')
+const connString = import.meta.env.CONNECT_STRING;
 // Connection string
 //const connString = 'EndpointSuffix=core.windows.net';
 var downloadString = "https://ysmedia.blob.core.windows.net/lsp";
