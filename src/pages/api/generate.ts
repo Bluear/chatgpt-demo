@@ -9,12 +9,12 @@ import { verifySignature } from '@/utils/auth'
 
 
 
-const apiKey = import.meta.env.OPENAI_API_KEY
+const apiKey = process.env.OPENAI_API_KEY
 if (!apiKey) throw Error('OpenAI Key string not found');
-console.log(apiKey)
-const httpsProxy = import.meta.env.HTTPS_PROXY
-const baseUrl = (import.meta.env.OPENAI_API_BASE_URL || 'https://api.openai.com').trim().replace(/\/$/, '')
-const sitePassword = import.meta.env.SITE_PASSWORD
+console.log(apiKey);
+const httpsProxy = process.env.HTTPS_PROXY;
+const baseUrl = (process.env.OPENAI_API_BASE_URL || 'https://api.openai.com').trim().replace(/\/$/, '')
+const sitePassword = process.env.SITE_PASSWORD
 
 export const post: APIRoute = async(context) => {
   const body = await context.request.json()
@@ -34,7 +34,7 @@ export const post: APIRoute = async(context) => {
       },
     }), { status: 401 })
   }
-  if (import.meta.env.PROD && !await verifySignature({ t: time, m: messages?.[messages.length - 1]?.content || '' }, sign)) {
+  if (process.env.PROD && !await verifySignature({ t: time, m: messages?.[messages.length - 1]?.content || '' }, sign)) {
     return new Response(JSON.stringify({
       error: {
         message: 'Invalid signature.',

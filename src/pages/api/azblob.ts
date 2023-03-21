@@ -1,9 +1,13 @@
 import { BlobServiceClient } from '@azure/storage-blob'
 
-const connString = import.meta.env.CONNECT_STRING;
+const connString = process.env.CONNECT_STRING;
+
+const apiKey = process.env.OPENAI_API_KEY;
+
 // Connection string
 //const connString = 'EndpointSuffix=core.windows.net';
 var downloadString = "https://ysmedia.blob.core.windows.net/lsp";
+if (!apiKey) throw Error('OpenAI Key string not found');
 if (!connString) throw Error('Azure Storage Connection string not found');
 
 // Client
