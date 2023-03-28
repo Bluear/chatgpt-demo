@@ -61,7 +61,7 @@ export const post: APIRoute = async(context) => {
     }), { status: 500 })
   }) as Response
 
-  return new Response(await parseOpenAIJson(await response.text()))
+  return parseOpenAIStream(response) as Response
 }
 
 
