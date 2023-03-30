@@ -21,7 +21,7 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
     assistant: 'bg-gradient-to-r from-yellow-200 via-green-200 to-green-300',
   }
   const [source] = createSignal('')
-  const { copy, copied } = useClipboard({ source, copiedDuring: 1000 })
+  const { copy, copied } = useClipboard({ source, read:true, copiedDuring: 1000 ,legacy:true})
 
   useEventListener('click', (e) => {
     const el = e.target as HTMLElement
