@@ -5,10 +5,11 @@ import { main } from '@/pages/api/azblob'
 
 const model = import.meta.env.VITE_OPENAI_API_MODEL || 'gpt-3.5-turbo'
 
+
 export const generatePayload = (apiKey: string, messages: ChatMessage[]): RequestInit & { dispatcher?: any } => ({
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiKey}`,
+    'api-key': `${apiKey}`,
   },
   method: 'POST',
   body: JSON.stringify({
@@ -35,7 +36,11 @@ export const parseOpenAIStream = (rawResponse: Response) => {
         console.log(event.type)
         if (event.type === 'event') {
           const data = event.data
-          if (data === '[DONE]') {
+          console.log(data)
+          const json1 = JSON.parse(data)
+          const text = json1.choices[0].finish_reason
+          console.log(text)
+          if (data === "[Done]"||text === "stop") {
             controller.close()
             return
           }
@@ -57,6 +62,7 @@ export const parseOpenAIStream = (rawResponse: Response) => {
             controller.error(e)
           }
         }
+        
       }
 
       const parser = createParser(streamParser)
